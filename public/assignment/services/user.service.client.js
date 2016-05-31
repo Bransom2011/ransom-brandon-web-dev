@@ -14,17 +14,45 @@
 
         var api = {
           createUser: createUser,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword
+            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserById: findUserById,
+            updateUser: updateUser,
+            deleteUser: deleteUser
         };
        return api;
 
-        function createUser(){
+        function updateUser(id, newUser){
+            for (var i in users){
+                if (users[i]._id === id){
+                    users[i].firstName = newUser.firstName;
+                    users[i].lastName = newUser.lastName;
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        function createUser(user){
 
         }
+        function deleteUser(id){
+
+        }
+
+        //Perhaps use a timestamp to identify users uniquely??  
         function findUserByUsernameAndPassword (username, password){
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password){
                     return users[i];
+                }
+                return null;
+            }
+        }
+
+        function findUserById(id){
+            for(var i in users) {
+                if(users[i]._id === id){
+                   return users[i];
                 }
                 return null;
             }
